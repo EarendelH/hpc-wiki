@@ -1,0 +1,904 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="EarendelH">
+      
+      
+        <link rel="canonical" href="https://earendelh.github.io/hpc-wiki/PBS%2025515fa32b794959bf7940ae3c813d7b/">
+      
+      
+        <link rel="prev" href="../Jetstream2%200c4a41618ffe40efb8fcbf2a482ef404/">
+      
+      
+        <link rel="next" href="../tar%20%E8%A7%A3%E5%8E%8B%E5%B7%A5%E5%85%B7/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+    
+    
+      
+        <title>PBS - HPC-wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pbs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="HPC-wiki" class="md-header__button md-logo" aria-label="HPC-wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HPC-wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PBS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="HPC-wiki" class="md-nav__button md-logo" aria-label="HPC-wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    HPC-wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Bridges-2%20dbde2db04c2b4f9e8f400c60c58e56c3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bridges-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gadi%203ae99b0a45794497ae998ffcd08e67d5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gadi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jetstream2%200c4a41618ffe40efb8fcbf2a482ef404/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jetstream2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PBS
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    PBS
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      目录
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tar%20%E8%A7%A3%E5%8E%8B%E5%B7%A5%E5%85%B7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tar 解压工具
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%90%AF%E6%98%8EQiMing%209b0e1c86283e44c2b2949dac4f07227e/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    启明QiMing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A3%80%E7%B4%A2%E9%9B%86%E7%BE%A4%E4%BF%A1%E6%81%AF%20868bebca841243739b267bb3290f82a9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    检索集群信息
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%AF%94%E8%B5%9B%E6%B1%87%E6%80%BB%E5%8F%8A%E4%BB%8B%E7%BB%8D%201d13034ec92b44d6987114a2de30f083/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    比赛汇总及介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%9B%B8%E5%85%B3%E8%AE%BA%E5%9D%9B%203e6cac4401e04f46a6363f95f1fe1723/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    相关论坛
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%AB%98%E6%A0%A1%E8%B6%85%E7%AE%97%E9%9B%86%E7%BE%A4%E6%8C%87%E5%8D%97%20077ca106723d42f7917cb5ce270eada4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    高校超算集群指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      目录
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="pbs">PBS</h1>
+<ul>
+<li>PBS(Portable Batch System)最初由NASA的Ames研究中心开发，主要为了提供一个能满足异构计算网络需要的软件包，用于灵活的批处理，特别是满足高性能计算的需要，如集群系统、超级计算机和大规模并行系统。PBS的主要特点有：代码开放，免费获取；支持批处理、交互式作业和串行、多种并行作业，如MPI、 PVM、HPF、MPL；PBS是功能最为齐全, 历史最悠久, 支持最广泛的本地集群调度器之一.</li>
+<li>PBS的目前包括openPBS, PBS Pro和Torque三个主要分支. 其中OpenPBS是最早的PBS系统, 目前已经没有太多后续开发, PBS pro是PBS的商业版本, 功能最为丰富. Torque是Clustering公司接过了OpenPBS, 并给与后续支持的一个开源版本.</li>
+</ul>
+<h2 id="_1">目录</h2>
+<h1 id="pbs_1">PBS命令</h1>
+<p>在shell等终端中可以使用的命令有：</p>
+<ol>
+<li>
+<p><strong><code>qsub</code> 命令：用于提交作业脚本</strong></p>
+<p><strong>命令格式：</strong></p>
+<p><code>bash
+qsub [-a date_time]
+[-e path] [-I] [-l resource_list]
+[-M user_list] [-N name]
+[-S path_list] [-u user_list]
+[-W additional_attributes]</code></p>
+<h3 id="1-a-date_time">1. <code>-a date_time</code></h3>
+<ul>
+<li>含义：指定作业何时开始执行。</li>
+<li>格式：<code>[[CC]YY]MMDDhhmm[.SS]</code><ul>
+<li><code>CC</code>：世纪</li>
+<li><code>YY</code>：年份</li>
+<li><code>MM</code>：月份</li>
+<li><code>DD</code>：日期</li>
+<li><code>hh</code>：小时（24小时制）</li>
+<li><code>mm</code>：分钟</li>
+<li><code>SS</code>：秒（可选）</li>
+</ul>
+</li>
+<li>用途：可以设置作业延迟启动。例如，<code>qsub -a 202409151230 my_job.sh</code> 会在2024年9月15日12:30运行作业。</li>
+</ul>
+<h3 id="2-e-path">2. <code>-e path</code></h3>
+<ul>
+<li>含义：指定作业的标准错误输出路径。</li>
+<li>用途：用于将作业运行过程中产生的错误信息输出到指定文件。如果不指定，默认错误输出会保存在作业运行目录中。例如，<code>qsub -e /path/to/error_file my_job.sh</code> 将错误输出保存到 <code>/path/to/error_file</code>。</li>
+</ul>
+<h3 id="3-i">3. <code>-I</code></h3>
+<ul>
+<li>含义：交互模式。</li>
+<li>用途：允许用户提交交互式作业。使用该选项时，用户将直接进入作业节点，执行交互式命令。交互作业通常适用于调试和开发。</li>
+</ul>
+<h3 id="4-l-resource_list">4. <code>-l resource_list</code></h3>
+<ul>
+<li>含义：指定作业所需的资源列表。</li>
+<li>格式：<code>resource_name=value</code></li>
+<li>用途：资源列表定义作业所需的计算资源。例如，指定CPU核心数、内存大小、节点数量等资源。常见资源有：<ul>
+<li><code>nodes</code>：需要的节点数。</li>
+<li><code>mem</code>：所需内存。</li>
+<li><code>walltime</code>：预计运行时间。例如，<code>qsub -l nodes=2:ppn=4,walltime=10:00:00 my_job.sh</code> 表示作业需要2个节点，每个节点4个核心，预计运行时间为10小时。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-m-user_list">5. <code>-M user_list</code></h3>
+<ul>
+<li>含义：指定作业通知的邮件地址列表。</li>
+<li>用途：当作业的状态发生变化（例如作业开始、完成、失败等）时，PBS会发送通知到指定的邮箱。例如，<code>qsub -M user@example.com my_job.sh</code> 会在作业完成或错误时发送邮件通知到 <code>user@example.com</code>。</li>
+</ul>
+<h3 id="6-n-name">6. <code>-N name</code></h3>
+<ul>
+<li>含义：指定作业名称。</li>
+<li>用途：为作业指定一个可识别的名字。作业名称可以帮助用户更容易地在队列中识别特定作业。例如，<code>qsub -N my_job my_job.sh</code> 将作业命名为 <code>my_job</code>。</li>
+</ul>
+<h3 id="7-s-path_list">7. <code>-S path_list</code></h3>
+<ul>
+<li>含义：指定用于执行作业的shell路径。</li>
+<li>用途：PBS将使用指定的shell来解释作业脚本。常用shell包括 <code>/bin/bash</code>, <code>/bin/sh</code> 等。例如，<code>qsub -S /bin/bash my_job.sh</code> 将使用bash shell来执行作业。</li>
+</ul>
+<h3 id="8-u-user_list">8. <code>-u user_list</code></h3>
+<ul>
+<li>含义：指定作业的用户列表。</li>
+<li>用途：用于为其他用户提交作业（需要管理员权限）。通常用于共享作业或者在多用户环境中为特定用户运行作业。例如，<code>qsub -u user1,user2 my_job.sh</code> 可以为 <code>user1</code> 和 <code>user2</code> 提交作业。</li>
+</ul>
+<h3 id="9-w-additional_attributes">9. <code>-W additional_attributes</code></h3>
+<ul>
+<li>含义：设置附加的作业属性。</li>
+<li>
+<p>用途：此参数允许设置其他高级作业属性。常见的附加属性包括：</p>
+<ul>
+<li><code>depend=dependency_list</code>：设置作业依赖。例如，某个作业只有在另一个作业完成后才能运行。<code>dependency_list</code> 可以是依赖的作业ID列表。</li>
+<li><code>group_list</code>：指定作业所属的组。</li>
+</ul>
+<p><strong>例如，<code>qsub -W depend=afterok:12345 my_job.sh</code> 表示只有当作业ID为12345的作业成功完成后，当前作业才会运行。</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>qstat</code> 命令：用于查询作业状态信息</strong></p>
+<pre><code>   **命令格式：**
+</code></pre>
+<p><code>bash
+qstat [-f][-a][-i] [-n][-s] [-R] [-Q][-q][-B][-u]</code></p>
+<ol>
+<li><strong>-f jobid 列出指定作业的信息</strong></li>
+<li><strong>-a 列出系统所有作业</strong></li>
+<li><strong>-i 显示等待执行的作业信息</strong></li>
+<li><strong>-n 列出分配给此作业的结点</strong></li>
+<li><strong>-s 显示简短的作业状态信息</strong></li>
+<li><strong>-R 显示资源使用报告</strong></li>
+<li><strong>-Q 显示队列的统计信息</strong></li>
+<li><strong>-q 显示可用队列信息</strong></li>
+<li><strong>-u userid 列出指定用户的所有作业</strong></li>
+<li><strong>-B 列出PBS Server信息</strong></li>
+<li><strong><code>qdel</code> 命令：用于删除已提交的作业</strong></li>
+</ol>
+<p>命令格式：</p>
+<p><code>bash
+qdel [-W 间隔时间] 作业号</code></p>
+</li>
+<li>
+<p><strong><code>qmgr</code> 命令：用于队列管理 （通常只有具有管理员权限才可以使用，用户用不上）</strong></p>
+<ul>
+<li>
+<p>qmgr详细用法</p>
+<p><code>qmgr</code> 是 PBS（Portable Batch System）和 Torque 中的命令行工具，用于管理和配置作业调度系统的设置。通过 <code>qmgr</code>，管理员可以管理服务器、队列和节点的配置。通常只有具有管理员权限的用户才可以使用 <code>qmgr</code> 进行系统级操作。</p>
+<p>以下是 <code>qmgr</code> 的常见用法和操作：</p>
+<h3 id="1-qmgr">1. 进入 <code>qmgr</code> 交互模式</h3>
+<p>首先，打开终端并输入 <code>qmgr</code> 进入交互模式：</p>
+<p>```bash
+qmgr</p>
+<p>```</p>
+<p>进入交互模式后，提示符会变成 <code>Qmgr:</code>，表示你可以开始输入管理命令。</p>
+<h3 id="2-qmgr">2. 直接使用 <code>qmgr</code> 执行单个命令</h3>
+<p>你也可以直接在终端使用 <code>qmgr</code> 执行单个命令，而不进入交互模式。例如：</p>
+<p>```bash
+qmgr -c "list server"</p>
+<p>```</p>
+<h3 id="3">3. 常见命令用法</h3>
+<h3 id="31">3.1 查看配置信息</h3>
+<ul>
+<li>
+<p><strong>查看服务器配置</strong>：</p>
+<p>```bash
+qmgr -c "list server"</p>
+<p>```</p>
+<p>该命令会列出PBS服务器的当前配置。</p>
+</li>
+<li>
+<p><strong>查看队列配置</strong>：</p>
+<p>```bash
+qmgr -c "list queue queue_name"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "list queue workq"</p>
+<p>```</p>
+<p>该命令会显示名为 <code>workq</code> 的队列的详细配置信息。</p>
+</li>
+<li>
+<p><strong>查看节点配置</strong>：</p>
+<p>```bash
+qmgr -c "list node node_name"</p>
+<p>```</p>
+<p>列出指定节点的配置信息。如果想查看所有节点，可以用：</p>
+<p>```bash
+qmgr -c "list node"</p>
+<p>```</p>
+</li>
+</ul>
+<h3 id="32">3.2 创建和删除队列</h3>
+<ul>
+<li>
+<p><strong>创建新队列</strong>：</p>
+<p>```bash
+qmgr -c "create queue queue_name"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "create queue new_queue"</p>
+<p>```</p>
+<p>该命令会创建名为 <code>new_queue</code> 的新队列。</p>
+</li>
+<li>
+<p><strong>删除队列</strong>：</p>
+<p>```bash
+qmgr -c "delete queue queue_name"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "delete queue old_queue"</p>
+<p>```</p>
+<p>删除名为 <code>old_queue</code> 的队列。</p>
+</li>
+</ul>
+<h3 id="33">3.3 修改队列或服务器属性</h3>
+<ul>
+<li>
+<p><strong>设置队列属性</strong>：</p>
+<p>```bash
+qmgr -c "set queue queue_name attribute=value"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "set queue workq max_running=10"</p>
+<p>```</p>
+<p>该命令将 <code>workq</code> 队列的 <code>max_running</code> 属性设置为 <code>10</code>，即该队列中同时允许运行的作业数。</p>
+</li>
+<li>
+<p><strong>设置服务器属性</strong>：</p>
+<p>```bash
+qmgr -c "set server attribute=value"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "set server scheduling=true"</p>
+<p>```</p>
+<p>该命令开启作业调度功能。</p>
+</li>
+</ul>
+<h3 id="34">3.4 管理节点</h3>
+<ul>
+<li>
+<p><strong>添加新节点</strong>：</p>
+<p>```bash
+qmgr -c "create node node_name"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "create node node01"</p>
+<p>```</p>
+<p>创建一个名为 <code>node01</code> 的节点。</p>
+</li>
+<li>
+<p><strong>删除节点</strong>：</p>
+<p>```bash
+qmgr -c "delete node node_name"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "delete node node01"</p>
+<p>```</p>
+</li>
+<li>
+<p><strong>设置节点属性</strong>：</p>
+<p>```bash
+qmgr -c "set node node_name attribute=value"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "set node node01 state=offline"</p>
+<p>```</p>
+<p>将节点 <code>node01</code> 设置为离线状态。</p>
+</li>
+</ul>
+<h3 id="35">3.5 使配置生效</h3>
+<ul>
+<li>
+<p><strong>启用队列</strong>：</p>
+<p>```bash
+qmgr -c "set queue queue_name enabled=true"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "set queue new_queue enabled=true"</p>
+<p>```</p>
+<p>启用 <code>new_queue</code> 队列。</p>
+</li>
+<li>
+<p><strong>启动队列</strong>：</p>
+<p>```bash
+qmgr -c "set queue queue_name started=true"</p>
+<p>```</p>
+<p>例如：</p>
+<p>```bash
+qmgr -c "set queue new_queue started=true"</p>
+<p>```</p>
+<p>这表示 <code>new_queue</code> 队列已准备好接受作业。</p>
+</li>
+</ul>
+<h3 id="36">3.6 停止和启用调度</h3>
+<ul>
+<li>
+<p><strong>停止调度器</strong>：</p>
+<p>```bash
+qmgr -c "set server scheduling=false"</p>
+<p>```</p>
+<p>暂停调度器，作业将不会调度运行。</p>
+</li>
+<li>
+<p><strong>启用调度器</strong>：</p>
+<p>```bash
+qmgr -c "set server scheduling=true"</p>
+<p>```</p>
+<p>启动调度器，作业将正常调度。</p>
+</li>
+</ul>
+<h3 id="4-qmgr">4. 退出 <code>qmgr</code></h3>
+<p>如果你进入了交互模式，输入以下命令即可退出：</p>
+<p>```bash
+exit</p>
+<p>```</p>
+<h3 id="_2">示例</h3>
+<h3 id="_3">查看所有队列的详细信息：</h3>
+<p>```bash
+qmgr -c "list queue"</p>
+<p>```</p>
+<h3 id="_4">创建并配置新队列：</h3>
+<p>```bash
+qmgr -c "create queue batch"
+qmgr -c "set queue batch queue_type=execution"
+qmgr -c "set queue batch enabled=true"
+qmgr -c "set queue batch started=true"</p>
+<p>```</p>
+<h3 id="_5">设置最大作业数：</h3>
+<p>```bash
+qmgr -c "set server max_running=100"</p>
+<p>```</p>
+<h3 id="_6">总结</h3>
+<p><code>qmgr</code> 是一个非常强大的管理工具，可以用于管理PBS服务器、队列和节点的各项配置。作为管理员，通过 <code>qmgr</code> 可以动态调整调度系统的行为和资源分配策略，确保高效地管理计算资源。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="pbs_2">PBS脚本</h1>
+<pre><code class="language-bash">#!/bin/bash
+#PBS -N my_job                # 作业名称
+#PBS -l nodes=2:ppn=4         # 资源请求，2个节点，每节点4个核心
+#PBS -l walltime=10:00:00     # 最大运行时间，格式为 hh:mm:ss
+#PBS -l mem=8gb               # 请求作业所需的内存
+#PBS -q batch                 # 指定队列
+#PBS -o /path/to/output_file  # 标准输出文件路径
+#PBS -e /path/to/error_file   # 错误输出文件路径
+#PBS -M user@example.com      # 邮件通知地址
+#PBS -m abe                   # 邮件通知选项：a=作业开始时，b=作业结束时，e=作业失败时
+#PBS -j                       # 表示系统输出，
+                                                            # 如果是oe，则标准错误输出(stderr)和标准输出(stdout)合并为stdout，
+                                # 如果是eo，则合并为stderr
+                                  # 如果没有设定或设定为n，则stderr和stdout分开。
+#PBS -P priority              # 设置作业的优先级，值在-1024到+1024之间。数值越大，优先级越高。
+#PBS -W depend=afterok:12345  # 设置作业依赖其他作业的完成情况。例如，某作业只有在另一个作业成功完成后才能开始。
+
+# 切换到作业的工作目录（PBS默认启动时在用户的主目录）
+cd $PBS_O_WORKDIR
+
+# 加载需要的模块或环境
+module load python/3.8
+
+# 执行程序或脚本
+python my_script.py
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+    
+  </body>
+</html>
