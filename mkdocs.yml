@@ -1,1 +1,13 @@
-site_name: My Docs
+site_name: HPC-wiki
+site_author: EarendelH
+site_url: https://earendelh.github.io/hpc-wiki/
+theme:
+  name: material
+  palette:
+    # primary: "purple"
+    # accent: "purple"
+  font:
+    text: "Roboto"
+    code: "Roboto Mono"
+  # logo: "images/logo.png"
+  # favicon: "images/favicon.ico"
